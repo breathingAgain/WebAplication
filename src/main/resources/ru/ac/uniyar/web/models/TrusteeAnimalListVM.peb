@@ -1,0 +1,28 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Список опекаемых животных
+{% endblock %}
+
+{% block content %}
+
+    {% import "./macros/filterList.peb" %}
+    {{ filterList("Фильтрация животных:",model.form,"view","Отфильтровать по виду животного:") }}
+
+    {% if model.animalList.size == 0 %}
+        <label>
+            <h3>Опекаемых животных нет!!!</h3>
+        </label>
+    {% endif %}
+    <div class="grid-x">
+        {% for animal in model.animalList %}
+            <div class="call small-3 medium-3 large-3 callout primary">
+                <p class="text-center">Вид животного: {{animal.view}}</p>
+                <p class="text-center">Имя животного: {{animal.name}}</p>
+                <p class="text-center"><a href="/animalList/{{ animal.id }}" class="button">Перейти к животному</a></p>
+            </div>
+        {% endfor %}
+    </div>
+    {% import "./macros/paginator.peb" %}
+    {{ paginator(model.currentPage,model.countPage,model.form,"view","animalList") }}
+    {% endblock %}

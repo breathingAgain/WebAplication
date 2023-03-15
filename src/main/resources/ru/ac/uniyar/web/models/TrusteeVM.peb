@@ -1,0 +1,14 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Страница с опекуном
+{% endblock %}
+
+{% block content %}
+    <div class="callout primary">
+        <p class="text-center">ФИО: {{ model.user.fio }}</p>
+        <p class="text-center">Дата добавления: {{ model.user.dateCreation | date("dd-MM-yyyy HH:mm:ss") }}</p>
+        <p class="text-center">Описание: {{ model.user.description }}</p>
+    </div>
+{% endblock %}
+

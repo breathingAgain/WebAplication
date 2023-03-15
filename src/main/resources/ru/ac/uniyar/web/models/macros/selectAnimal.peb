@@ -1,0 +1,29 @@
+{% macro selectAnimal(form,animalList,animalId,isError) %}
+    <p>
+        <label>
+            Выберите животное:
+            <select name="animal">
+                {% if form.fields["animal"] | first is not empty %}
+                    {% for animal in animalList %}
+                        {% if form.fields["animal"] | first == animal.id.toString() %}
+                            <option selected value="{{ animal.id }}">{{ animal.view }} {{ animal.name }}</option>
+                        {% else %}
+                            <option value="{{ animal.id }}">{{ animal.view }} {{ animal.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for animal in animalList %}
+                        {% if animal.id == animalId %}
+                            <option selected value="{{ animal.id }}">{{ animal.view }} {{ animal.name }}</option>
+                        {% else %}
+                            <option value="{{ animal.id }}">{{ animal.view }} {{ animal.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </select>
+            {% if isError %}
+                <span class="label alert">Ошбика с выпадающим списком. Попробуйте еще раз.</span>
+            {% endif %}
+        </label>
+    </p>
+{% endmacro %}

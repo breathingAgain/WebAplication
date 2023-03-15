@@ -1,0 +1,82 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Страница с животным
+{% endblock %}
+
+
+{% block content %}
+    <div class="callout primary">
+        <p class="text-center">Описание животного:</p>
+        <p class="text-center">Вид: {{ model.animal.view }}</p>
+        <p class="text-center">Имя: {{ model.animal.name }}</p>
+        <p class="text-center">Дата добавления: {{ model.animal.date | date("dd-MM-yyyy HH:mm:ss") }}</p>
+        <p class="text-center">Описание: {{ model.animal.description }}</p>
+        {% if permissions.canAddAnimal %}
+            <p class="text-center"><a href="/animalList/{{ model.animal.id }}/edit" class="button">Изменить</a>
+        {% endif %}
+    </div>
+    <div>
+        <div class="callout">
+            {% if model.countEntryForTrustee > 0 %}
+                Записей блога, которые могут просматривать только опекуны: {{ model.countEntryForTrustee }}
+            {% endif %}
+            <p>Записи блога животного:</p>
+
+            {% if model.entryList.size == 0 %}
+                <label>
+                    <h4>Записей блога нет!!!</h4>
+                </label>
+            {% endif %}
+            {% for entry in model.entryList %}
+                <div class="callout primary">
+                    {% if permissions.canWatchEntryForTrustee and entry.forTrustee %}
+                        <div class="callout success">
+                            Эта запись доступна только опекунам!!!
+                        </div>
+                    {% endif %}
+                    <p>Дата добавления: {{ entry.date | date("dd-MM-yyyy HH:mm:ss") }}</p>
+                    <p>Текст: {{ entry.text }}</p>
+                </div>
+            {% endfor %}
+            {% if permissions.canAddEntryAnimal %}
+                <a href="/newEntry?animal_id={{ model.animal.id }}" class="button">Добавить запись</a>
+            {% endif %}
+            <div class="grid-x grid-padding-x">
+                {% if model.currentPage <= 1 %}
+                    <a class="button disabled"><</a>
+                {% else %}
+                    <a href="/animalList/{{ model.animal.id }}?page={{ model.currentPage - 1 }}" class="button"><</a>
+                {% endif %}
+                {% if model.currentPage >= model.countPage %}
+                    <a class="button disabled">></a>
+                {% else %}
+                    <a href="/animalList/{{ model.animal.id }}?page={{ model.currentPage + 1 }}" class="button">></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if permissions.canBecomeTrustee %}
+        {% if model.isTrustedAnimal %}
+            <a href="/animalList/{{ model.animal.id }}/noTrustAnimal" class="button">Перестать опекать</a>
+        {% else %}
+            <a href="/animalList/{{ model.animal.id }}/trustAnimal" class="button"">Стать опекуном</a>
+        {% endif %}
+    {% endif %}
+    {% if permissions.canWatchTrusteeByAnimal %}
+        <div class="callout">
+            <p>Опекуны животного:</p>
+            {% if model.trusteeList.size == 0 %}
+                <label>
+                    <h4>Опекунов нет!!!</h4>
+                </label>
+            {% endif %}
+            {% for trustee in model.trusteeList %}
+                <div class="callout primary">
+                    <p>ФИО: {{ trustee.fio }}</p>
+                    <a href="/trusteeList/{{ trustee.id }}">Перейти к опекуну</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

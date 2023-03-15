@@ -1,0 +1,17 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Страница с блогом
+{% endblock %}
+
+{% block content %}
+    <div class = "primary callout">
+        <p class="text-center">Дата добавления: {{ model.entry.date | date("dd-MM-yyyy HH:mm:ss") }}</p>
+        <p class="text-center">Описание: {{ model.entry.text }}</p>
+        <p class="text-center"><a href="/animalList/{{ model.entry.animal.id }}" class="button">Перейти к животному</a></p>
+        {% if permissions.canAddEntryAnimal %}
+            <p class="text-center"><a href="/entryList/{{ model.entry.id }}/edit" class="button">Изменить запись</a></p>
+        {% endif %}
+
+    </div>
+{% endblock %}

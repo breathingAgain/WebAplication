@@ -1,0 +1,27 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Изменение записи блога
+{% endblock %}
+
+{% block content %}
+    <div class="callout primary">
+        <form method="post">
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите текст блога:","text","Нужно ввести текст блога",model.form) }}
+            {% import "./macros/selectAnimal.peb" %}
+            {{ selectAnimal(model.form,model.animalList,model.animalId,model.animalListError) }}
+            <div>
+                <label>
+                    Только для опекунов:
+                    {% if model.form.fields["forTrustee"] | first == "true" %}
+                        <input type="checkbox" name="forTrustee" value="true" checked/>
+                    {% else %}
+                        <input type="checkbox" name="forTrustee"" value="true">
+                    {% endif %}
+                </label>
+            </div>
+            <input type="submit" value="Изменить запись" class="button">
+        </form>
+    </div>
+{% endblock %}

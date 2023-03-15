@@ -1,0 +1,34 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Регистрация в системе.
+{% endblock %}
+
+
+{% block content %}
+    <div class="callout primary">
+        <form method="post">
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите ФИО:","fio","Нужно ввести ФИО",model.form) }}
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите логин:","login","Нужно ввести логин",model.form) }}
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите пароль:","password1","Нужно ввести пароль",model.form, "password") }}
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Повторно введите пароль:","password2","Нужно ввести пароль повторно",model.form,"password") }}
+            {% if model.isUnoriginalLogin %}
+                <div class="grid-padding-y">
+                    <span class="label alert">Логин уже существует, введите другой</span>
+                </div>
+            {% endif %}
+            {% if model.isDiffPassword %}
+                <div class="grid-padding-y">
+                    <span class="label alert">Пароли должны совпадать</span>
+                </div>
+            {% endif %}
+            <div class="grid-padding-y">
+                <input type="submit" value="Зарегистрироваться" class="button">
+            </div>
+        </form>
+    </div>
+{% endblock %}

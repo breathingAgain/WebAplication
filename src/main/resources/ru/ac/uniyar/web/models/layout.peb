@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js" lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Нет заголовка{% endblock %}</title>
+    <link rel="stylesheet" href="/css/foundation.css">
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+<body>
+<div class="grid-container">
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">Зоопарк</li>
+                <li><a href="/">Главная страница</a></li>
+                {% if permissions.canWatchPersonalTape %}
+                    <li><a href="/entryList">Блог животных</a></li>
+                {% endif %}
+                {% if permissions.canWatchTrusteeByAnimal %}
+                    <li><a href="/trusteeList">Список опекунов</a></li>
+                {% endif %}
+                <li><a href="/animalList">Список животных</a></li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                {% if currentUser is not null %}
+                    <li>
+                        <ul class="class="dropdown menu" data-dropdown-menu>
+                            <li>
+                                <a href="#0">{{currentUser.fio}}</a>
+                                <ul class="menu">
+                                    {% if permissions.canWatchTrustedAnimal %}
+                                        <li><a href="/trusteeAnimal">Список опекаемых животных</a></li>
+                                        <li><a href="/editDescription">Изменить описание пользователя</a></li>
+                                    {% endif %}
+                                    <li><a href="/logout">Выйти</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                {% else %}
+                    <li><a href="/login">Войти</a></li>
+                    <li><a href="/registration">Зарегистрироваться</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+{% block content %}
+    Нет содержимого
+{% endblock %}
+
+</div>
+
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/what-input.js"></script>
+    <script src="/js/vendor/foundation.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

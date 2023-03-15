@@ -1,0 +1,17 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Изменение животного
+{% endblock %}
+
+{% block content %}
+    <div class="callout primary">
+        <form method="post">
+            {% import "./macros/inputForm.peb" %}
+                {{ inputForm("Введите вид:","view","Нужно ввести вид животного",model.form) }}
+                {{ inputForm("Введите имя:","name","Нужно ввести имя животного",model.form) }}
+                {{ inputForm("Введите описание:","description","Нужно ввести описание животного",model.form) }}
+            <input type="submit" value="Изменить животное" class="button">
+        </form>
+    </div>
+{% endblock %}

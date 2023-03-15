@@ -1,0 +1,11 @@
+{% macro inputForm(labelText,name,alertText,form,type="text") %}
+<p>
+    <label>
+        {{labelText}}
+        <input type={{ type }} name={{name}} value="{{ form.fields[name] | first }}">
+        {% if form.fields[name] | first is empty and form.errors is not empty %}
+            <span class="label alert">{{alertText}}</span>
+        {% endif %}
+    </label>
+</p>
+{% endmacro %}

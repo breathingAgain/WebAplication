@@ -1,0 +1,28 @@
+{% macro filterList(mainText,form,filter1Type,filter1Text) %}
+    <div>
+        {{mainText}}
+        <form method="get">
+            <div class="grid-x grid-margin-x">
+                <div class="cell medium-3">
+                    <label>
+                        {{filter1Text}}
+                        <input type="text" name={{filter1Type}} value="{{ form.fields[filter1Type] | first }}">
+                    </label>
+                </div>
+                <div class="cell medium-2">
+                    <label>
+                        От:
+                        <input type="date" name="dateFrom" value="{{ form.fields["dateFrom"] | first }}">
+                    </label>
+                </div>
+                <div class="cell medium-2">
+                    <label>
+                        До:
+                        <input type="date" name="dateTo" value="{{ form.fields["dateTo"] | first }}">
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="button">Найти</button>
+        </form>
+    </div>
+{% endmacro %}

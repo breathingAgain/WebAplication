@@ -1,0 +1,13 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Произошла ошибка
+{% endblock %}
+
+{% block content %}
+    <div class="callout alert">
+        <p class="text-center h3">Произошла ошибка!</p>
+        <p class="text-center h4">Вы перешли по ошибочному адресу: <em>{{ model.path }}</em>. Чтобы вернуться на главную страницу, нажмите на кнопку!</p>
+        <p class="text-center"><a href="/" class="button">Вернуться на главную страницу</a></p>
+    </div>
+{% endblock %}

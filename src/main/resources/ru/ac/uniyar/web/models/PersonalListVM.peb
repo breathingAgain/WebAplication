@@ -1,0 +1,36 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Список блогов
+{% endblock %}
+
+{% block content %}
+    {% if permissions.canAddEntryAnimal %}
+        <a href="/newEntry" class="button">Добавить новую запись в блог</a>
+    {% endif %}
+
+
+    {% import "./macros/filterList.peb" %}
+    {{ filterList("Фильтрация блогов:",model.form,"view","Отфильтровать по виду животного:") }}
+
+    {% if model.entryList.size == 0 %}
+        <label>
+            <h3>Записей в блоге нет!!!</h3>
+        </label>
+    {% endif %}
+    <div class="grid-x">
+        {% for entry in model.entryList %}
+            <div class="callout primary">
+                {% if permissions.canWatchEntryForTrustee and entry.forTrustee %}
+                    <div class="callout success">
+                        Эта запись доступна только опекунам!!!
+                    </div>
+                {% endif %}
+                <p>Дата добавления: {{ entry.date | date("dd-MM-yyyy HH:mm:ss") }}</p>
+                <p>Текст: {{ entry.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% import "./macros/paginator.peb" %}
+    {{ paginator(model.currentPage,model.countPage,model.form,"view","entryList") }}
+{% endblock %}

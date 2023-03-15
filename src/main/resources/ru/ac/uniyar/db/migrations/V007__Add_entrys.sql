@@ -1,0 +1,3 @@
+INSERT INTO ENTRY(DATE_CREATION, ANIMAL_ID, TEXT, FOR_TRUSTEE) VALUES('2022-06-22 20:00:00', 3, 'Жираф чувствует себя хорошо, аклиматизация прошла хорошо', false);
+INSERT INTO ENTRY(DATE_CREATION, ANIMAL_ID, TEXT, FOR_TRUSTEE) VALUES('2022-06-25 20:00:00', 3, 'Жираф приболел, у него пропал апетит, начинаем курс лечения', true);
+INSERT INTO ENTRY(DATE_CREATION, ANIMAL_ID, TEXT, FOR_TRUSTEE) VALUES('2022-06-30 20:00:00', 5, 'Слон приходит к барьеру клетки с жирафом, возможно они общаются друг с другом', false);

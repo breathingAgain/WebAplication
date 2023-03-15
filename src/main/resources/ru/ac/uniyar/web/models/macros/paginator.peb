@@ -1,0 +1,14 @@
+{% macro paginator(currentPage,countPage,form,filter1Type,typeList) %}
+    <div class="grid-x grid-padding-x">
+        {% if currentPage <= 1 %}
+            <a class="button disabled"><</a>
+        {% else %}
+            <a href="/{{typeList}}?page={{ currentPage - 1 }}&{{filter1Type}}={{ form.fields[filter1Type] | first }}&dateFrom={{ form.fields["dateFrom"] | first }}&dateTo={{ form.fields["dateTo"] | first }}" class="button"><</a>
+        {% endif %}
+        {% if currentPage >= countPage %}
+            <a class="button disabled">></a>
+        {% else %}
+            <a href="/{{typeList}}?page={{ currentPage + 1 }}&{{filter1Type}}={{ form.fields[filter1Type] | first }}&dateFrom={{ form.fields["dateFrom"] | first }}&dateTo={{ form.fields["dateTo"] | first }}" class="button">></a>
+        {% endif %}
+    </div>
+{% endmacro %}

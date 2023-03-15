@@ -1,0 +1,23 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Авторизация в системе.
+{% endblock %}
+
+
+{% block content %}
+    <div class="callout primary">
+        <form method="post">
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите логин:","login","Нужно ввести логин",model.form) }}
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите пароль:","password","Нужно ввести пароль",model.form, "password") }}
+            {% if model.isInCorrectLoginOrPassword %}
+            <div>
+                <span class="label alert">Неверный логин или пароль</span>
+            </div>
+            {% endif %}
+            <input type="submit" value="Войти" class="button">
+        </form>
+    </div>
+{% endblock %}

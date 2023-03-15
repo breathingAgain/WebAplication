@@ -1,0 +1,15 @@
+{% extends "./layout.peb" %}
+
+{% block title %}
+    Изменение пользователя
+{% endblock %}
+
+{% block content %}
+    <div class="callout primary">
+        <form method="post">
+            {% import "./macros/inputForm.peb" %}
+            {{ inputForm("Введите текст описания:","description","",model.form) }}
+            <input type="submit" value="Изменить описание" class="button">
+        </form>
+    </div>
+{% endblock %}
