@@ -99,3 +99,13 @@ fun main() {
     webServer.stop()
     h2databaseManager.stopServers()
 }
+
+*/
+БД: 
+1 ресурсы дб мигрэйшн (при авторизации для юзера и прав 2 таблицы) 
+2 main domain tables 
+3 main domain services 
+4 webAplication (val h2databaseManager..... дописать в fun main startApplication как у Еги) 
+5 web filters authFilter permission берем у Еги 
+6 handlers routes app дописываем операции
+/*
